@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://nxs55cy431ou"]
+
+[ext_resource type="Texture2D" uid="uid://dpocjaoi54wl4" path="res://sniper.png" id="1_xm00l"]
+[ext_resource type="Script" path="res://Player.gd" id="2_7g0g0"]
+
+[node name="Main" type="Node"]
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(98.8125, 96.5)
+scale = Vector2(0.254696, 0.183498)
+texture = ExtResource("1_xm00l")
+script = ExtResource("2_7g0g0")

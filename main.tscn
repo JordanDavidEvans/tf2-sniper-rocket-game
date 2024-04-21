@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://nxs55cy431ou"]
+
+[ext_resource type="Texture2D" uid="uid://qdvtghqaao0h" path="res://o5YMR9o.jpg" id="8_b8cmy"]
+
+[sub_resource type="GDScript" id="GDScript_mct2c"]
+script/source = "extends Node
+
+var num_rockets = 5
+var player_scene = preload(\"res://player.tscn\")
+var rocket_big_scene = preload(\"res://rocket.tscn\")
+var rocket_spawn_range_min = 100
+var rocket_spawn_range_max = 300
+@onready var viewport_size = get_viewport().size
+
+var player_node = null
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	setup_new_level(num_rockets)
+	pass # Replace with function body.
+
+func _on_player_death():
+	print(\"Death\")
+	spawn_player()
+	pass
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+
+
+func setup_new_level(num_ast):
+	spawn_player()
+
+	for i in num_rockets:
+		spawn_rocket()
+
+func spawn_player():
+	if player_node:
+		player_node.queue_free()
+	player_node = player_scene.instantiate()
+	player_node.position = viewport_size/2
+	player_node.has_died.connect(_on_player_death)
+	add_child( player_node )
+	pass
+func spawn_rocket():
+	var n = rocket_big_scene.instantiate()
+	n.position = viewport_size/2.0 + (Utility.RandomUnitVector2() * randf_range(rocket_spawn_range_min, rocket_spawn_range_max))
+	add_child( n )
+	pass
+
+
+"
+
+[node name="Main" type="Node"]
+script = SubResource("GDScript_mct2c")
+
+[node name="backround" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(400, 300.5)
+scale = Vector2(0.420833, 0.563889)
+texture = ExtResource("8_b8cmy")

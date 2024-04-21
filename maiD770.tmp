@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://nxs55cy431ou"]
+
+[ext_resource type="Texture2D" uid="uid://dpocjaoi54wl4" path="res://sniper.png" id="1_xm00l"]
+[ext_resource type="Script" path="res://Player.gd" id="2_7g0g0"]
+[ext_resource type="Texture2D" uid="uid://dc86w213s50cw" path="res://120px-Rocket.png" id="3_b8tur"]
+[ext_resource type="Texture2D" uid="uid://bu6p3mkpetr8b" path="res://unnamed.png" id="3_lk6wr"]
+[ext_resource type="Script" path="res://Rocket.gd" id="3_wgltp"]
+[ext_resource type="AudioStream" uid="uid://c128cygecg6v1" path="res://rocket1.wav" id="6_11xrj"]
+[ext_resource type="Texture2D" uid="uid://qdvtghqaao0h" path="res://o5YMR9o.jpg" id="8_b8cmy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wqi6h"]
+radius = 110.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m00lq"]
+radius = 13.0
+height = 118.471
+
+[node name="Main" type="Node"]
+
+[node name="Player" type="RigidBody2D" parent="."]
+position = Vector2(144, 100)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("2_7g0g0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_xm00l")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-8.2016e-05, -3.8147e-06)
+shape = SubResource("CircleShape2D_wqi6h")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+position = Vector2(-90, 30)
+current = true
+
+[node name="Rocket" type="RigidBody2D" parent="."]
+position = Vector2(492, 92)
+rotation = 5.10312
+script = ExtResource("3_wgltp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocket"]
+texture = ExtResource("3_b8tur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket"]
+position = Vector2(1.00002, 1)
+rotation = 1.1973
+shape = SubResource("CapsuleShape2D_m00lq")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Rocket"]
+z_index = -1
+position = Vector2(48.4638, -24.6629)
+texture = ExtResource("3_lk6wr")
+gravity = Vector2(0, 0)
+initial_velocity_max = 50.0
+angular_velocity_max = 641.95
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Rocket"]
+position = Vector2(-1.14258, -2.77388)
+rotation = 2.73973
+stream = ExtResource("6_11xrj")
+volume_db = -5.0
+autoplay = true
+
+[node name="backround" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(630, 335)
+scale = Vector2(0.669531, 0.641204)
+texture = ExtResource("8_b8cmy")
